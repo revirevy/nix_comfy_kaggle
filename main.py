@@ -1,4 +1,4 @@
-import os
+import os, sys
 import subprocess
 import time
 import zipfile
@@ -42,13 +42,13 @@ def install_package(url):
     os.chdir("/kaggle/working/ComfyUI/custom_nodes")
 
     if not os.path.exists(package_path):
-        get_ipython().system(f'git clone {url} --recursive')
+        subprocess.run(['git', 'clone', url, '--recursive'], check=True, text=True, capture_output=True)
 
     os.chdir(package_path)
-    get_ipython().system('git pull --all')
+    subprocess.run(['git', 'pull', '--all'])
 
     if os.path.exists("requirements.txt"):
-        get_ipython().system('uv pip install --system -r requirements.txt --quiet')
+        subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'], check=True, text=True, capture_output=True)
 
     print("="*60, f"Package from {url} installed successfully.", "-"*60, sep="\n")
 
@@ -57,10 +57,10 @@ def setup_comfyui():
     print("="*60, "Starting to set up ComfyUI...", "-"*60, sep="\n")
     os.chdir("/kaggle/working")
     if not os.path.exists("/kaggle/working/ComfyUI/") or not os.path.exists("/kaggle/working/ComfyUI/requirements.txt") :
-        get_ipython().system('git clone https://github.com/comfyanonymous/ComfyUI.git --recursive')
+        subprocess.run(['git', 'clone', 'https://github.com/comfyanonymous/ComfyUI.git', '--recursive'], check=True, text=True, capture_output=True)
     os.chdir("ComfyUI")
-    get_ipython().system('git pull --all')
-    get_ipython().system('uv pip install --system -r requirements.txt --quiet')
+    subprocess.run(['git', 'pull', '--all'])
+    subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'])
 
     model_dirs = [
         "/kaggle/working/ComfyUI/models/LLM",
@@ -71,13 +71,13 @@ def setup_comfyui():
     for dir_path in model_dirs:
         os.makedirs(dir_path, exist_ok=True)
     print("="*60, "ComfyUI set up successfully.", "-"*60, sep="\n")
-    
+
 def xlinkthis(src, dest):
     import os
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     if not os.path.exists(dest) and not os.path.islink(dest):
         os.symlink(src, dest)
-        
+
 def link_models():
     """Create symbolic links for model files."""
     print("="*60, "Starting to link models...", "-"*60, sep="\n")
@@ -132,7 +132,7 @@ def link_models():
     for src, dest in links:
         xlinkthis(src,dest)
     print("="*60, "Models linked successfully.", "-"*60, sep="\n")
-    
+
 def link_additional_models():
     """Link additional models from specified directories."""
     print("="*60, "Starting to link additional models...", "="*60, sep="\n")
@@ -150,7 +150,7 @@ def link_additional_models():
     # Link models from /kaggle/input/sdxl_controlnets/pytorch/default/3/
     for x in os.listdir("/kaggle/input/sdxl_controlnets/pytorch/default/3/"):
         print(x)
-        os.symlink(f"/kaggle/input/sdxl_controlnets/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
+        xlinkthis(f"/kaggle/input/sdxl_controlnets/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
         if 'ip-adapter' in x:
             xlinkthis(f"/kaggle/input/sdxl_controlnets/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/ipadapter/{x}")
 
@@ -159,15 +159,24 @@ def link_additional_models():
         print(x)
         xlinkthis(f"/kaggle/input/pulid-model/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/pulid/{x}")
 
+    for x in os.listdir("/kaggle/input/instant_id/pytorch/default/2"):
+        print(x)
+        xlinkthis(f"/kaggle/input/instant_id/pytorch/default/2/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
+        #/kaggle/input/instant_id/pytorch/default/2
+    for x in os.listdir("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/"):
+        print(x)
+        xlinkthis(f"/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
+
+    # /kaggle/input/controlnet-package-hsbd10/pytorch/default/4
     print("="*60, "Additional models linked successfully.", "="*60, sep="\n")
 
 def start_comfyui_instances():
     """Start ComfyUI instances."""
     print("="*60, "Starting ComfyUI instances...", "-"*60, sep="\n")
     os.chdir("/kaggle/working/ComfyUI/")
-    xP1 = subprocess.Popen(["python", "main.py", "--cuda-device", "0", "--port", "8188", "--highvram"])
+    xP1 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", "--highvram"])
     time.sleep(10)
-    xP2 = subprocess.Popen(["python", "main.py", "--cuda-device", "1", "--port", "8189", "--highvram"])
+    xP2 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "1", "--port", "8189", "--highvram"])
     time.sleep(10)
     print("="*60, "ComfyUI instances started successfully.", "-"*60, sep="\n")
 
@@ -176,12 +185,12 @@ def start_playit_agent():
     print("="*60, "Starting Playit agent...", "-"*60, sep="\n")
     os.chdir("/kaggle/working/ComfyUI/")
     if not os.path.exists('/kaggle/working/ComfyUI/playit-linux-amd64'):
-        get_ipython().system('wget https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-linux-amd64')
-    get_ipython().system('chmod +x ./playit-linux-amd64')
+        subprocess.run(['wget', 'https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-linux-amd64'])
+    subprocess.run(['chmod', '+x', './playit-linux-amd64'])
     os.makedirs("/kaggle/working/ComfyUI/logs", exist_ok=True)
     subprocess.Popen("nohup /kaggle/working/ComfyUI/playit-linux-amd64 >> /kaggle/working/ComfyUI/logs/playit.log 2>&1 &", bufsize=0, shell=True)
     time.sleep(4)
-    get_ipython().system('tail -n 20 /kaggle/working/ComfyUI/logs/playit.log')
+    subprocess.run(['tail', '-n', '20', '/kaggle/working/ComfyUI/logs/playit.log'])
     print("","="*60, "Playit agent started successfully.", "-"*60, sep="\n")
 
 def execute_first_cell():
@@ -202,21 +211,21 @@ def main():
     print("="*60, "Starting main function...", "-"*60, sep="\n")
     # Install uv
     print("="*60, "Installing uv...", "-"*60, sep="\n")
-    get_ipython().system('python -m pip install -U pip uv -q')
+    subprocess.run([sys.executable, '-m', 'pip', 'install', '-U', 'pip', 'uv', '-q'], check=True, text=True, capture_output=True)
 
     # Example usage of zip_folder
     folder_to_zip = '/kaggle/working/ComfyUI/output'
     if os.path.exists(folder_to_zip):
         output_zip = f'/kaggle/working/output_{datetime.now():%d%m%Y_%H%M}.zip'
         zip_folder(folder_to_zip, output_zip)
-    
+
         # Move files
         x_old = '/kaggle/working/old_output'
         move_files(folder_to_zip, x_old)
 
     # Setup ComfyUI
     setup_comfyui()
-    
+
     # Install packages
     packages = [
         "https://github.com/comfyanonymous/ComfyUI_bitsandbytes_NF4",
@@ -236,8 +245,6 @@ def main():
         "https://github.com/cubiq/PuLID_ComfyUI",
         "https://github.com/cubiq/ComfyUI_InstantID",
         "https://github.com/cubiq/ComfyUI_IPAdapter_plus",
-        "https://github.com/revirevy/Comfyui_saveimage_imgbb",
-        "https://github.com/ltdrdata/ComfyUI-Manager",
         "https://github.com/comfyanonymous/ComfyUI_experiments",
         "https://github.com/chengzeyi/Comfy-WaveSpeed",
         "https://github.com/Fannovel16/comfyui_controlnet_aux",
@@ -250,7 +257,12 @@ def main():
         "https://github.com/marduk191/ComfyUI-Fluxpromptenhancer",
         "https://github.com/fairy-root/Flux-Prompt-Generator",
         "https://github.com/VykosX/ControlFlowUtils",
-        "https://github.com/godmt/ComfyUI-List-Utils"
+        "https://github.com/godmt/ComfyUI-List-Utils",
+        "https://github.com/pythongosssss/ComfyUI-WD14-Tagger",
+        "https://github.com/miaoshouai/ComfyUI-Miaoshouai-Tagger",
+        "https://github.com/revirevy/Comfyui_saveimage_imgbb",
+        "https://github.com/ltdrdata/ComfyUI-Manager",
+        
     ]
     for package in packages:
         install_package(package)
@@ -260,10 +272,10 @@ def main():
 
     # Link models
     link_models()
-    
+
     # link_additional_models
     link_additional_models()
-    
+
     # Start ComfyUI instances
     start_comfyui_instances()
 
