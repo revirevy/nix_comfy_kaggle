@@ -231,6 +231,7 @@ def main():
         "https://github.com/kijai/ComfyUI-Florence2",
         "https://github.com/XLabs-AI/x-flux-comfyui",
         "https://github.com/crystian/ComfyUI-Crystools",
+        "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
         "https://github.com/city96/ComfyUI-GGUF",
         "https://github.com/cubiq/PuLID_ComfyUI",
         "https://github.com/cubiq/ComfyUI_InstantID",
