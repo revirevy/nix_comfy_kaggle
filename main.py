@@ -189,7 +189,7 @@ def start_playit_agent():
     subprocess.run(['chmod', '+x', './playit-linux-amd64'])
     os.makedirs("/kaggle/working/ComfyUI/logs", exist_ok=True)
     subprocess.Popen("nohup /kaggle/working/ComfyUI/playit-linux-amd64 >> /kaggle/working/ComfyUI/logs/playit.log 2>&1 &", bufsize=0, shell=True)
-    time.sleep(4)
+    time.sleep(10)
     subprocess.run(['tail', '-n', '20', '/kaggle/working/ComfyUI/logs/playit.log'])
     print("","="*60, "Playit agent started successfully.", "-"*60, sep="\n")
 
