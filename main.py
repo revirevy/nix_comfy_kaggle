@@ -260,6 +260,8 @@ def main():
         "https://github.com/godmt/ComfyUI-List-Utils",
         "https://github.com/pythongosssss/ComfyUI-WD14-Tagger",
         "https://github.com/miaoshouai/ComfyUI-Miaoshouai-Tagger",
+        "https://github.com/GraftingRayman/ComfyUI_GraftingRayman",
+        "https://github.com/pollockjj/ComfyUI-MultiGPU",
         "https://github.com/revirevy/Comfyui_saveimage_imgbb",
         "https://github.com/ltdrdata/ComfyUI-Manager",
         
