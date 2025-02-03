@@ -3,6 +3,8 @@ import subprocess
 import time
 import zipfile
 import shutil
+import requests
+    
 from datetime import datetime
 import threading
 from IPython.core.getipython import get_ipython
@@ -205,6 +207,29 @@ def scheduler():
     while True:
         execute_first_cell()
         time.sleep(60)  # 60 seconds
+def down_antelope():
+    # Define the URL and the target directory
+    url = "https://github.com/deepinsight/insightface/releases/download/v0.7/antelopev2.zip"
+    target_dir = "/kaggle/working/ComfyUI/models/insightface/models/antelopev2/"
+    
+    # Create target directory if it doesn't exist
+    os.makedirs(target_dir, exist_ok=True)
+    
+    # Download the ZIP file
+    response = requests.get(url)
+    zip_file_path = os.path.join(target_dir, "antelopev2.zip")
+    
+    with open(zip_file_path, "wb") as f:
+        f.write(response.content)
+    
+    # Unzip the file
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(target_dir)
+    
+    # Optionally, remove the ZIP file after extraction
+    os.remove(zip_file_path)
+    
+    print("Download and extraction completed.")
 
 def main():
     """Main function to orchestrate the setup and execution."""
@@ -283,6 +308,9 @@ def main():
 
     # Start Playit agent
     start_playit_agent()
+
+    # download antelope
+    down_antelope()
 
     # Start scheduler
     scheduler_thread = threading.Thread(target=scheduler)
