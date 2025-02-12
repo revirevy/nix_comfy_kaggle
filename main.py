@@ -296,7 +296,7 @@ https://github.com/nosiu/comfyui-instantId-faceswap
 https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet
 https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two
 https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait""".split("\n")
-     packages += [   "https://github.com/revirevy/Comfyui_saveimage_imgbb",
+    packages += [   "https://github.com/revirevy/Comfyui_saveimage_imgbb",
         "https://github.com/ltdrdata/ComfyUI-Manager",
         
     ]
