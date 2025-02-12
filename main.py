@@ -208,6 +208,36 @@ def scheduler():
     while True:
         execute_first_cell()
         time.sleep(60)  # 60 seconds
+# ===============================================
+# def down_antelope():
+#     # Define the URL and the target directory
+#     url = "https://github.com/deepinsight/insightface/releases/download/v0.7/antelopev2.zip"
+#     target_dir = "/kaggle/working/ComfyUI/models/insightface/models/antelopev2/"
+    
+#     # Create target directory if it doesn't exist
+#     os.makedirs(target_dir, exist_ok=True)
+    
+#     # Download the ZIP file
+#     response = requests.get(url)
+#     zip_file_path = os.path.join(target_dir, "antelopev2.zip")
+    
+#     with open(zip_file_path, "wb") as f:
+#         f.write(response.content)
+    
+#     # Unzip the file
+#     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+#         zip_ref.extractall(target_dir)
+    
+#     # Optionally, remove the ZIP file after extraction
+#     os.remove(zip_file_path)
+    
+#     print("Download and extraction completed for Antelopev2.")
+# ===============================================
+import os
+import requests
+import zipfile
+from tqdm import tqdm  # For progress tracking
+
 def down_antelope():
     # Define the URL and the target directory
     url = "https://github.com/deepinsight/insightface/releases/download/v0.7/antelopev2.zip"
@@ -216,28 +246,108 @@ def down_antelope():
     # Create target directory if it doesn't exist
     os.makedirs(target_dir, exist_ok=True)
     
-    # Download the ZIP file
-    response = requests.get(url)
+    # Define the path for the downloaded ZIP file
     zip_file_path = os.path.join(target_dir, "antelopev2.zip")
     
-    with open(zip_file_path, "wb") as f:
-        f.write(response.content)
+    try:
+        # Download the ZIP file with progress tracking
+        print("Downloading Antelopev2 model...")
+        response = requests.get(url, stream=True)
+        total_size = int(response.headers.get('content-length', 0))
+        
+        with open(zip_file_path, "wb") as f, tqdm(
+            desc="Downloading",
+            total=total_size,
+            unit='B',
+            unit_scale=True,
+            unit_divisor=1024
+        ) as progress_bar:
+            for data in response.iter_content(chunk_size=1024):
+                size = f.write(data)
+                progress_bar.update(size)
+        
+        print("Download completed. Extracting files...")
+        
+        # Unzip the file
+        with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+            zip_ref.extractall(target_dir)
+        
+        # Optionally, remove the ZIP file after extraction
+        os.remove(zip_file_path)
+        
+        print("Extraction completed. Antelopev2 model is ready.")
     
-    # Unzip the file
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-        zip_ref.extractall(target_dir)
-    
-    # Optionally, remove the ZIP file after extraction
-    os.remove(zip_file_path)
-    
-    print("Download and extraction completed for Antelopev2.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error during download: {e}")
+    except zipfile.BadZipFile as e:
+        print(f"Error during extraction: {e}. The downloaded file might be corrupted.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+# ===============================================
+# def down_landmark():
+#     subprocess.Popen("apt install aria2 -qq", bufsize=0, shell=True)
+#     subprocess.Popen("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/bluefoxcreation/FaceAlignment/resolve/main/fan2_68_landmark.onnx?download=true -d /kaggle/working/ComfyUI/models/landmarks -o fan2_68_landmark.onnx", bufsize=0, shell=True)
+#     subprocess.Popen("aria2c  --console-log-level=error -c  -x16 -s16 -j5  -k 1M 'https://drive.google.com/uc?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812&export=download'  -d /kaggle/working/ComfyUI/models/bisenet -o 79999_iter.pth", bufsize=0, shell=True)
+#     subprocess.Popen("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt?download=true  -d /kaggle/working/ComfyUI/models/ultralytics/bbox -o face_yolov8m.pt", bufsize=0, shell=True)
+#     subprocess.Popen("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_inpaint_fp16.safetensors?download=true -d /kaggle/working/ComfyUI/models/controlnet/ -o control_v11p_sd15_inpaint_fp16.safetensors", bufsize=0, shell=True)
+#     print("Download and extraction completed for landmark and bbox and sd15 inpaint.")
+
+# ===============================================
 def down_landmark():
-    subprocess.Popen("apt install aria2 -qq", bufsize=0, shell=True)
-    subprocess.Popen("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/bluefoxcreation/FaceAlignment/resolve/main/fan2_68_landmark.onnx?download=true -d /kaggle/working/ComfyUI/models/landmarks -o fan2_68_landmark.onnx", bufsize=0, shell=True)
-    subprocess.Popen("aria2c  --console-log-level=error -c  -x16 -s16 -j5  -k 1M 'https://drive.google.com/uc?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812&export=download'  -d /kaggle/working/ComfyUI/models/bisenet -o 79999_iter.pth", bufsize=0, shell=True)
-    subprocess.Popen("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt?download=true  -d /kaggle/working/ComfyUI/models/ultralytics/bbox -o face_yolov8m.pt", bufsize=0, shell=True)
-    subprocess.Popen("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_inpaint_fp16.safetensors?download=true -d /kaggle/working/ComfyUI/models/controlnet/ -o control_v11p_sd15_inpaint_fp16.safetensors", bufsize=0, shell=True)
-    print("Download and extraction completed for landmark and bbox and sd15 inpaint.")
+    # Install aria2 quietly
+    print("Installing aria2...")
+    try:
+        subprocess.run("apt install aria2 -y -qq", shell=True, check=True)
+        print("aria2 installed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to install aria2: {e}")
+        return
+
+    # Define the list of downloads
+    downloads = [
+        {
+            "url": "https://huggingface.co/bluefoxcreation/FaceAlignment/resolve/main/fan2_68_landmark.onnx?download=true",
+            "dir": "/kaggle/working/ComfyUI/models/landmarks",
+            "output": "fan2_68_landmark.onnx"
+        },
+        {
+            "url": "https://drive.google.com/uc?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812&export=download",
+            "dir": "/kaggle/working/ComfyUI/models/bisenet",
+            "output": "79999_iter.pth"
+        },
+        {
+            "url": "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt?download=true",
+            "dir": "/kaggle/working/ComfyUI/models/ultralytics/bbox",
+            "output": "face_yolov8m.pt"
+        },
+        {
+            "url": "https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_inpaint_fp16.safetensors?download=true",
+            "dir": "/kaggle/working/ComfyUI/models/controlnet/",
+            "output": "control_v11p_sd15_inpaint_fp16.safetensors"
+        }
+    ]
+
+    # Download each file sequentially
+    for i, download in enumerate(downloads):
+        url = download["url"]
+        dir_path = download["dir"]
+        output_file = download["output"]
+
+        print(f"Downloading file {i + 1}/{len(downloads)}: {output_file}...")
+        try:
+            subprocess.run(
+                f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M '{url}' -d '{dir_path}' -o '{output_file}'",
+                shell=True,
+                check=True
+            )
+            print(f"Download completed for {output_file}.")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to download {output_file}: {e}")
+
+    print("All downloads completed.")
+
+
 def main():
     """Main function to orchestrate the setup and execution."""
     print("="*60, "Starting main function...", "-"*60, sep="\n")
