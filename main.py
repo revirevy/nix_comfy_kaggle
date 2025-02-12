@@ -229,7 +229,11 @@ def down_antelope():
     # Optionally, remove the ZIP file after extraction
     os.remove(zip_file_path)
     
-    print("Download and extraction completed.")
+    print("Download and extraction completed for Antelopev2.")
+def down_landmark():
+    !apt install aria2 -qq
+    !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/bluefoxcreation/FaceAlignment/resolve/main/fan2_68_landmark.onnx?download=true -d /kaggle/working/ComfyUI/models/landmarks -o fan2_68_landmark.onnx
+    !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt?download=true  -d /kaggle/working/ComfyUI/models/ultralytics/bbox -o face_yolov8m.pt
 
 def main():
     """Main function to orchestrate the setup and execution."""
