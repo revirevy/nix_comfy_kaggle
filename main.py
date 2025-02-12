@@ -233,8 +233,10 @@ def down_antelope():
 def down_landmark():
     !apt install aria2 -qq
     !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/bluefoxcreation/FaceAlignment/resolve/main/fan2_68_landmark.onnx?download=true -d /kaggle/working/ComfyUI/models/landmarks -o fan2_68_landmark.onnx
+    !aria2c  --console-log-level=error -c  -x16 -s16 -j5  -k 1M "https://drive.google.com/uc?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812&export=download"  -d /kaggle/working/ComfyUI/models/bisenet -o 79999_iter.pth
     !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt?download=true  -d /kaggle/working/ComfyUI/models/ultralytics/bbox -o face_yolov8m.pt
-
+    !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_inpaint_fp16.safetensors?download=true -d /kaggle/working/ComfyUI/models/controlnet/ -o control_v11p_sd15_inpaint_fp16.safetensors
+    print("Download and extraction completed for landmark and bbox and sd15 inpaint.")
 def main():
     """Main function to orchestrate the setup and execution."""
     print("="*60, "Starting main function...", "-"*60, sep="\n")
