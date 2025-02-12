@@ -4,6 +4,8 @@ import time
 import zipfile
 import shutil
 import requests
+from tqdm import tqdm  # For progress tracking
+
     
 from datetime import datetime
 import threading
@@ -233,10 +235,6 @@ def scheduler():
     
 #     print("Download and extraction completed for Antelopev2.")
 # ===============================================
-import os
-import requests
-import zipfile
-from tqdm import tqdm  # For progress tracking
 
 def down_antelope():
     # Define the URL and the target directory
