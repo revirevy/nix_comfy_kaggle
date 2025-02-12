@@ -239,7 +239,7 @@ def scheduler():
 def down_antelope():
     # Define the URL and the target directory
     url = "https://github.com/deepinsight/insightface/releases/download/v0.7/antelopev2.zip"
-    target_dir = "/kaggle/working/ComfyUI/models/insightface/models/antelopev2/"
+    target_dir = "/kaggle/working/ComfyUI/models/insightface/models/"
     
     # Create target directory if it doesn't exist
     os.makedirs(target_dir, exist_ok=True)
