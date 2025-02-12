@@ -288,18 +288,18 @@ def main():
         "https://github.com/GraftingRayman/ComfyUI_GraftingRayman",
         "https://github.com/pollockjj/ComfyUI-MultiGPU",]
     packages += """https://github.com/dchatel/comfyui_facetools
-https://github.com/fssorc/ComfyUI_FaceShaper
-https://github.com/zhangp365/ComfyUI-utils-nodes
-https://github.com/vuongminh1907/ComfyUI_ZenID
-https://github.com/nuanarchy/ComfyUI-NuA-FlashFace
-https://github.com/nosiu/comfyui-instantId-faceswap
-https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet
-https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two
-https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait""".split("\n")
+            https://github.com/fssorc/ComfyUI_FaceShaper
+            https://github.com/zhangp365/ComfyUI-utils-nodes
+            https://github.com/vuongminh1907/ComfyUI_ZenID
+            https://github.com/nuanarchy/ComfyUI-NuA-FlashFace
+            https://github.com/nosiu/comfyui-instantId-faceswap
+            https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet
+            https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two
+            https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait""".split("\n")
     packages += [   "https://github.com/revirevy/Comfyui_saveimage_imgbb",
         "https://github.com/ltdrdata/ComfyUI-Manager",
         
-    ]
+        ]
     for package in packages:
         install_package(package)
 
