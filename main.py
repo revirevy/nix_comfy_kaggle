@@ -34,27 +34,32 @@ def move_files(source_folder, dest_folder):
                 print(f"Error moving file {item}: {e}")
     print("="*60, "Files moved successfully.", "-"*60, sep="\n")
 
+
 def install_package(url):
     """Install a package from a given URL."""
-    print("="*60, f"Starting to install package from {url}...", "-"*60, sep="\n")
-    package_name = url.split('/')[-1].replace('.git', '')
-    package_path = f"/kaggle/working/ComfyUI/custom_nodes/{package_name}"
+    try:
+        print("="*60, f"Starting to install package from {url}...", "-"*60, sep="\n")
+        package_name = url.split('/')[-1].replace('.git', '')
+        package_path = f"/kaggle/working/ComfyUI/custom_nodes/{package_name}"
 
-    if not os.path.exists("/kaggle/working/ComfyUI/custom_nodes/"):
-        os.makedirs("/kaggle/working/ComfyUI/custom_nodes/")
+        if not os.path.exists("/kaggle/working/ComfyUI/custom_nodes/"):
+            os.makedirs("/kaggle/working/ComfyUI/custom_nodes/")
 
-    os.chdir("/kaggle/working/ComfyUI/custom_nodes")
+        os.chdir("/kaggle/working/ComfyUI/custom_nodes")
 
-    if not os.path.exists(package_path):
-        subprocess.run(['git', 'clone', url, '--recursive'], check=True, text=True, capture_output=True)
+        if not os.path.exists(package_path):
+            subprocess.run(['git', 'clone', url, '--recursive'], check=True, text=True, capture_output=True)
 
-    os.chdir(package_path)
-    subprocess.run(['git', 'pull', '--all'])
+        os.chdir(package_path)
+        subprocess.run(['git', 'pull', '--all'], check=True, text=True, capture_output=True)
 
-    if os.path.exists("requirements.txt"):
-        subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'], check=True, text=True, capture_output=True)
+        if os.path.exists("requirements.txt"):
+            subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'], check=True, text=True, capture_output=True)
 
-    print("="*60, f"Package from {url} installed successfully.", "-"*60, sep="\n")
+        print("="*60, f"Package from {url} installed successfully.", "-"*60, sep="\n")
+    except Exception as e:
+        print(f"An error occurred while installing package from {url}: {str(e)}")
+        # You can add additional error handling or logging here if needed
 
 def setup_comfyui():
     """Set up ComfyUI and install necessary packages."""
