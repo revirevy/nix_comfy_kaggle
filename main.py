@@ -172,10 +172,25 @@ def link_additional_models():
         print(x)
         xlinkthis(f"/kaggle/input/instant_id/pytorch/default/2/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
         #/kaggle/input/instant_id/pytorch/default/2
+    
     for x in os.listdir("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/"):
         print(x)
         xlinkthis(f"/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
+    
+    
+    for x in os.listdir("/kaggle/input/dmd2/pytorch/default/1"):
+        print(x)
+        if 'lora' in x:
+            xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/loras/{x}")
+        else
+            xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
 
+    # /kaggle/input/juggernaut/pytorch/default/1
+
+    for x in os.listdir("/kaggle/input/juggernaut/pytorch/default/1/"):
+        print(x)
+        xlinkthis(f"/kaggle/input/juggernaut/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
+        
     # /kaggle/input/controlnet-package-hsbd10/pytorch/default/4
     print("="*60, "Additional models linked successfully.", "="*60, sep="\n")
 
