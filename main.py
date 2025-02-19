@@ -182,6 +182,8 @@ def link_additional_models():
         print(x)
         if 'lora' in x:
             xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/loras/{x}")
+        elif 'unet' in x.lower():
+            xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/unet/{x}")
         else:
             xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
 
