@@ -430,6 +430,7 @@ def main():
         "https://github.com/vuongminh1907/ComfyUI_ZenID",
         "https://github.com/nuanarchy/ComfyUI-NuA-FlashFace",
         "https://github.com/nosiu/comfyui-instantId-faceswap",
+        "https://github.com/EnragedAntelope/ComfyUI-EACloudNodes",
         
         "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet",
         "https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two",
