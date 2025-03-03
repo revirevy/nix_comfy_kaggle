@@ -431,6 +431,8 @@ def main():
         "https://github.com/nuanarchy/ComfyUI-NuA-FlashFace",
         "https://github.com/nosiu/comfyui-instantId-faceswap",
         "https://github.com/EnragedAntelope/ComfyUI-EACloudNodes",
+        "https://github.com/nicofdga/DZ-FaceDetailer",
+        "https://github.com/mav-rik/facerestore_cf",
         
         "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet",
         "https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two",
