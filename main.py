@@ -396,7 +396,7 @@ def main():
         "https://codeberg.org/Gourieff/comfyui-reactor-node",
         "https://github.com/BlenderNeko/ComfyUI_Noise",
         "https://github.com/ltdrdata/ComfyUI-Impact-Pack",
-        "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
+        
         "https://github.com/yolain/ComfyUI-Easy-Use",
         "https://github.com/kijai/ComfyUI-KJNodes",
         "https://github.com/kijai/ComfyUI-Florence2",
@@ -439,6 +439,7 @@ def main():
         "https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait",
 
         "https://github.com/zhangp365/ComfyUI-utils-nodes",
+        "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
         "https://github.com/revirevy/Comfyui_saveimage_imgbb",
         "https://github.com/ltdrdata/ComfyUI-Manager",
         
