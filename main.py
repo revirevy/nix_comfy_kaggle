@@ -105,10 +105,10 @@ def link_models():
          "/kaggle/working/ComfyUI/models/xlabs/contronets/flux-canny-controlnet-v3.safetensors"),
         ("/kaggle/input/controlnet/pytorch/flux-depth-controlnet/1/flux-depth-controlnet-v3.safetensors",
          "/kaggle/working/ComfyUI/models/xlabs/contronets/flux-depth-controlnet-v3.safetensors"),
-        ("/kaggle/input/realvisxl-v50/pytorch/default/1/realvisxl-v50.safetensors",
-         "/kaggle/working/ComfyUI/models/checkpoints/realvisxl-v50.safetensors"),
-        ("/kaggle/input/realvisxl-v50/pytorch/default/2/SG161222_RealVisXL_V5_0_Lightning.safetensors",
-         "/kaggle/working/ComfyUI/models/checkpoints/SG161222_RealVisXL_V5_0_Lightning.safetensors"),
+        # ("/kaggle/input/realvisxl-v50/pytorch/default/1/realvisxl-v50.safetensors",
+        #  "/kaggle/working/ComfyUI/models/checkpoints/realvisxl-v50.safetensors"),
+        # ("/kaggle/input/realvisxl-v50/pytorch/default/2/SG161222_RealVisXL_V5_0_Lightning.safetensors",
+        #  "/kaggle/working/ComfyUI/models/checkpoints/SG161222_RealVisXL_V5_0_Lightning.safetensors"),
         ("/kaggle/input/flux1devnf46stepsnsfw/pytorch/default/1/flux1DevNF46StepsNSFW_fluxdevFP86Steps.safetensors",
          "/kaggle/working/ComfyUI/models/checkpoints/flux1DevNF46StepsNSFW_fluxdevFP86Steps.safetensors"),
         ("/kaggle/input/8stepscrearthyperfluxdevbnb_v24hyperdevfp8unet_/pytorch/default/1/8StepsCreartHyperFluxDevBnb_v24HyperDevFp8Unet.safetensors",
@@ -192,7 +192,13 @@ def link_additional_models():
     for x in os.listdir("/kaggle/input/juggernaut/pytorch/default/1/"):
         print(x)
         xlinkthis(f"/kaggle/input/juggernaut/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
-        
+
+    #SDXl-mODELS
+    for x in os.listdir("/kaggle/input/realvisxl-v50/pytorch/default/3/"):
+        print(x)
+        xlinkthis(f"/kaggle/input/realvisxl-v50/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
+
+    
     # /kaggle/input/controlnet-package-hsbd10/pytorch/default/4
     print("="*60, "Additional models linked successfully.", "="*60, sep="\n")
 
