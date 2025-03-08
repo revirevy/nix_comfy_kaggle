@@ -371,6 +371,18 @@ def down_landmark():
         except subprocess.CalledProcessError as e:
             print(f"Failed to download {output_file}: {e}")
 
+    xlist = """https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/reswapper_256.onnx?download=true
+    https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/reswapper_128.onnx?download=true
+    https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/inswapper_128.onnx?download=true""".split('\n')
+    
+    os.makedirs("/kaggle/working/ComfyUI/models/reswapper/")
+    
+    for x in xlist:
+        print(x)
+        filnm = x.split('/')[-1].replace('?download=true','')
+        print(filnm)
+        !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M $x -d /kaggle/working/ComfyUI/models/reswapper/ -o $filnm
+
     print("All downloads completed.")
 
 
