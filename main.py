@@ -375,7 +375,7 @@ def down_landmark():
     https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/reswapper_128.onnx?download=true
     https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/inswapper_128.onnx?download=true""".split('\n')
     
-    os.makedirs("/kaggle/working/ComfyUI/models/reswapper/")
+    os.makedirs("/kaggle/working/ComfyUI/models/reswapper/",exist_ok=True)
     
     for i,x in enumerate(xlist):
         print(i,'-',x)
