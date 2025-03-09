@@ -377,12 +377,21 @@ def down_landmark():
     
     os.makedirs("/kaggle/working/ComfyUI/models/reswapper/")
     
-    for x in xlist:
-        print(x)
+    for i,x in enumerate(xlist):
+        print(i,'-',x)
         filnm = x.split('/')[-1].replace('?download=true','')
         print(filnm)
-        !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M $x -d /kaggle/working/ComfyUI/models/reswapper/ -o $filnm
-
+        # !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M $x -d /kaggle/working/ComfyUI/models/reswapper/ -o $filnm
+        print(f"Downloading file {i + 1}/{len(downloads)}: {output_file}...")
+        try:
+            subprocess.run(
+                f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M '{x}' -d '/kaggle/working/ComfyUI/models/reswapper/' -o '{filnm}'",
+                shell=True,
+                check=True
+            )
+            print(f"Download completed for {filnm}.")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to download {filnm}: {e}")
     print("All downloads completed.")
 
 
