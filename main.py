@@ -423,6 +423,7 @@ def main():
         "https://codeberg.org/Gourieff/comfyui-reactor-node",
         "https://github.com/BlenderNeko/ComfyUI_Noise",
         "https://github.com/ltdrdata/ComfyUI-Impact-Pack",
+        "https://github.com/ltdrdata/ComfyUI-Impact-Subpack",
         
         "https://github.com/yolain/ComfyUI-Easy-Use",
         "https://github.com/kijai/ComfyUI-KJNodes",
@@ -460,6 +461,8 @@ def main():
         "https://github.com/EnragedAntelope/ComfyUI-EACloudNodes",
         "https://github.com/nicofdga/DZ-FaceDetailer",
         "https://github.com/mav-rik/facerestore_cf",
+        
+
         
         "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet",
         "https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two",
