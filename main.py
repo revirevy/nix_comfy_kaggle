@@ -78,6 +78,7 @@ def setup_comfyui():
         "/kaggle/working/ComfyUI/models/pulid",
         "/kaggle/working/ComfyUI/models/clip_vision",
         "/kaggle/working/ComfyUI/models/xlabs/contronets/"
+        "/kaggle/working/ComfyUI/models/InstantIR/models/"
     ]
     for dir_path in model_dirs:
         os.makedirs(dir_path, exist_ok=True)
@@ -200,6 +201,13 @@ def link_additional_models():
         print(x)
         xlinkthis(f"/kaggle/input/realvisxl-v50/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
 
+    #InstantIR
+    for x in os.listdir("/kaggle/input/instantir/pytorch/default/2/"):
+        print(x)
+        xlinkthis(f"/kaggle/input/instantir/pytorch/default/2/{x}", f"/kaggle/working/ComfyUI/models/InstantIR/models/{x}")
+
+
+    
     
     # /kaggle/input/controlnet-package-hsbd10/pytorch/default/4
     print("="*60, "Additional models linked successfully.", "="*60, sep="\n")
