@@ -401,6 +401,7 @@ def main():
     # Install uv
     print("="*60, "Installing uv...", "-"*60, sep="\n")
     subprocess.run([sys.executable, '-m', 'pip', 'install', '-U', 'pip', 'uv', '-q'], check=True, text=True, capture_output=True)
+    # subprocess.run(['uv','pip', 'install', '--system', 'sageattention', '--quiet'])
 
     # Example usage of zip_folder
     folder_to_zip = '/kaggle/working/ComfyUI/output'
