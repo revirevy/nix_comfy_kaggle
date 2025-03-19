@@ -354,6 +354,7 @@ def down_landmark():
             "dir": "/kaggle/working/ComfyUI/models/controlnet/",
             "output": "control_v11p_sd15_inpaint_fp16.safetensors"
         }
+
     ]
 
     # Download each file sequentially
