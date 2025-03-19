@@ -206,9 +206,9 @@ def start_comfyui_instances():
     """Start ComfyUI instances."""
     print("="*60, "Starting ComfyUI instances...", "-"*60, sep="\n")
     os.chdir("/kaggle/working/ComfyUI/")
-    xP1 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", "--highvram"])
+    xP1 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet"]) #--fp8_e4m3fn-text-enc --fp8_e4m3fn-unet
     time.sleep(10)
-    xP2 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "1", "--port", "8189", "--highvram"])
+    xP2 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "1", "--port", "8189", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet"]) #, "--highvram"])
     time.sleep(10)
     print("="*60, "ComfyUI instances started successfully.", "-"*60, sep="\n")
 
