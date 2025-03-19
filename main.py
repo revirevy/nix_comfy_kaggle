@@ -478,7 +478,7 @@ def main():
         "https://github.com/zentrocdot/ComfyUI-RealESRGAN_Upscaler",
         "https://github.com/traugdor/ComfyUI-UltimateSDUpscale-GGUF",
         "https://github.com/jags111/efficiency-nodes-comfyui",
-        
+        "https://github.com/kijai/ComfyUI-segment-anything-2",
         
         
 
