@@ -469,6 +469,15 @@ def main():
         "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet",
         "https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two",
         "https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait",
+        "https://github.com/ssitu/ComfyUI_UltimateSDUpscale",
+        "https://github.com/kijai/ComfyUI-CCSR",
+        "https://github.com/TheBill2001/comfyui-upscale-by-model",
+        "https://github.com/zentrocdot/ComfyUI-RealESRGAN_Upscaler",
+        "https://github.com/traugdor/ComfyUI-UltimateSDUpscale-GGUF",
+        "https://github.com/jags111/efficiency-nodes-comfyui",
+        
+        
+        
 
         "https://github.com/zhangp365/ComfyUI-utils-nodes",
         "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
