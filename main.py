@@ -49,9 +49,11 @@ def install_package(url):
 
         if not os.path.exists(package_path):
             subprocess.run(['git', 'clone', url, '--recursive'], check=True, text=True, capture_output=True)
-
-        os.chdir(package_path)
-        subprocess.run(['git', 'pull', '--all'], check=True, text=True, capture_output=True)
+            print(f"Package {url} path newly git cloned")
+        else:
+            os.chdir(package_path)
+            subprocess.run(['git', 'pull', '--all'], check=True, text=True, capture_output=True)
+            print(f"Package {url} path exist already, just updated")
 
         if os.path.exists("requirements.txt"):
             subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'], check=True, text=True, capture_output=True)
