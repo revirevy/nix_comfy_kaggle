@@ -487,6 +487,7 @@ def main():
         "https://github.com/traugdor/ComfyUI-UltimateSDUpscale-GGUF",
         "https://github.com/jags111/efficiency-nodes-comfyui",
         "https://github.com/kijai/ComfyUI-segment-anything-2",
+        "https://github.com/Extraltodeus/ComfyUI-AutomaticCFG",
         
         
 
