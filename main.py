@@ -488,7 +488,10 @@ def main():
         "https://github.com/jags111/efficiency-nodes-comfyui",
         "https://github.com/kijai/ComfyUI-segment-anything-2",
         "https://github.com/Extraltodeus/ComfyUI-AutomaticCFG",
-        
+        "https://github.com/ltdrdata/ComfyUI-Inspire-Pack",
+        "https://github.com/evanspearman/ComfyMath",
+        "https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes",
+        "https://github.com/storyicon/comfyui_segment_anything",
         
 
         "https://github.com/zhangp365/ComfyUI-utils-nodes",
