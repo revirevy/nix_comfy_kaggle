@@ -216,9 +216,19 @@ def start_comfyui_instances():
     """Start ComfyUI instances."""
     print("="*60, "Starting ComfyUI instances...", "-"*60, sep="\n")
     os.chdir("/kaggle/working/ComfyUI/")
-    xP1 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet", "--highvram"]) #--fp8_e4m3fn-text-enc --fp8_e4m3fn-unet
+    # xP1 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet", "--highvram"]) #--fp8_e4m3fn-text-enc --fp8_e4m3fn-unet
+    os.makedirs("/kaggle/working/ComfyUI/logs", exist_ok=True)
+    with open("/kaggle/working/ComfyUI/logscomfy_8188.log", "a") as logfile:
+        xP1 = subprocess.Popen(
+            [sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", 
+             "--fp8_e4m3fn-text-enc", "--fp8_e4m3fn-unet", "--highvram"],
+            stdout=logfile,
+            stderr=subprocess.STDOUT
+        )
     time.sleep(10)
-    xP2 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "1", "--port", "8189", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet", "--highvram"]) #, "--highvram"])
+    with open("/kaggle/working/ComfyUI/logs/logs/comfy_8189.log", "a") as logfile:
+        xP2 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "1", "--port", "8189", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet", "--highvram"]
+                                          ,stdout=logfile, stderr=subprocess.STDOUT) #, "--highvram"])
     time.sleep(10)
     print("="*60, "ComfyUI instances started successfully.", "-"*60, sep="\n")
 
@@ -407,6 +417,7 @@ def down_landmark():
     
 def install_packages_list():
     # Install packages
+    print("Start Install packages list ... ")
     packages = [
         "https://github.com/comfyanonymous/ComfyUI_bitsandbytes_NF4",
         "https://github.com/WASasquatch/was-node-suite-comfyui",
@@ -481,6 +492,8 @@ def install_packages_list():
         ]
     for package in packages:
         install_package(package)
+        
+    print(f"All Packages list installed \n {'='*10}  DONE  {'='*10}")
 
 def main():
     """Main function to orchestrate the setup and execution."""
