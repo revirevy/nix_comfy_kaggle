@@ -404,29 +404,8 @@ def down_landmark():
         except subprocess.CalledProcessError as e:
             print(f"Failed to download {filnm}: {e}")
     print("All downloads completed.")
-
-
-def main():
-    """Main function to orchestrate the setup and execution."""
-    print("="*60, "Starting main function...", "-"*60, sep="\n")
-    # Install uv
-    print("="*60, "Installing uv...", "-"*60, sep="\n")
-    subprocess.run([sys.executable, '-m', 'pip', 'install', '-U', 'pip', 'uv', '-q'], check=True, text=True, capture_output=True)
-    # subprocess.run(['uv','pip', 'install', '--system', 'sageattention', '--quiet'])
-
-    # Example usage of zip_folder
-    folder_to_zip = '/kaggle/working/ComfyUI/output'
-    if os.path.exists(folder_to_zip):
-        output_zip = f'/kaggle/working/output_{datetime.now():%d%m%Y_%H%M}.zip'
-        zip_folder(folder_to_zip, output_zip)
-
-        # Move files
-        x_old = '/kaggle/working/old_output'
-        move_files(folder_to_zip, x_old)
-
-    # Setup ComfyUI
-    setup_comfyui()
-
+    
+def install_packages_list():
     # Install packages
     packages = [
         "https://github.com/comfyanonymous/ComfyUI_bitsandbytes_NF4",
@@ -502,6 +481,30 @@ def main():
         ]
     for package in packages:
         install_package(package)
+
+def main():
+    """Main function to orchestrate the setup and execution."""
+    print("="*60, "Starting main function...", "-"*60, sep="\n")
+    # Install uv
+    print("="*60, "Installing uv...", "-"*60, sep="\n")
+    subprocess.run([sys.executable, '-m', 'pip', 'install', '-U', 'pip', 'uv', '-q'], check=True, text=True, capture_output=True)
+    # subprocess.run(['uv','pip', 'install', '--system', 'sageattention', '--quiet'])
+
+    # Example usage of zip_folder
+    folder_to_zip = '/kaggle/working/ComfyUI/output'
+    if os.path.exists(folder_to_zip):
+        output_zip = f'/kaggle/working/output_{datetime.now():%d%m%Y_%H%M}.zip'
+        zip_folder(folder_to_zip, output_zip)
+
+        # Move files
+        x_old = '/kaggle/working/old_output'
+        move_files(folder_to_zip, x_old)
+
+    # Setup ComfyUI
+    setup_comfyui()
+
+    # Install packages
+    install_packages_list()
 
     # Setup ComfyUI
     setup_comfyui()
