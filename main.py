@@ -218,7 +218,7 @@ def start_comfyui_instances():
     os.chdir("/kaggle/working/ComfyUI/")
     # xP1 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet", "--highvram"]) #--fp8_e4m3fn-text-enc --fp8_e4m3fn-unet
     os.makedirs("/kaggle/working/ComfyUI/logs", exist_ok=True)
-    with open("/kaggle/working/ComfyUI/logscomfy_8188.log", "a") as logfile:
+    with open("/kaggle/working/ComfyUI/logs/comfy_8188.log", "a") as logfile:
         xP1 = subprocess.Popen(
             [sys.executable, "main.py", "--cuda-device", "0", "--port", "8188", 
              "--fp8_e4m3fn-text-enc", "--fp8_e4m3fn-unet", "--highvram"],
@@ -226,7 +226,7 @@ def start_comfyui_instances():
             stderr=subprocess.STDOUT
         )
     time.sleep(10)
-    with open("/kaggle/working/ComfyUI/logs/logs/comfy_8189.log", "a") as logfile:
+    with open("/kaggle/working/ComfyUI/logs/comfy_8189.log", "a") as logfile:
         xP2 = subprocess.Popen([sys.executable, "main.py", "--cuda-device", "1", "--port", "8189", "--fp8_e4m3fn-text-enc","--fp8_e4m3fn-unet", "--highvram"]
                                           ,stdout=logfile, stderr=subprocess.STDOUT) #, "--highvram"])
     time.sleep(10)
