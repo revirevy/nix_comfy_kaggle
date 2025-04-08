@@ -469,6 +469,7 @@ def install_packages_list():
         
         "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet",
         "https://github.com/EvilBT/ComfyUI_SLK_joy_caption_two",
+        "https://github.com/kijai/ComfyUI-LivePortraitKJ",
         "https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait",
         "https://github.com/ssitu/ComfyUI_UltimateSDUpscale",
         "https://github.com/kijai/ComfyUI-CCSR",
