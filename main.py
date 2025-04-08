@@ -140,6 +140,8 @@ def link_models():
          "/kaggle/working/ComfyUI/models/controlnet/instantid/LeInstantID_ControlNet_model.safetensors"),
         ("/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/4xnomosunidat_upscaler.safetensors",
          "/kaggle/working/ComfyUI/models/upscale_models/4xnomosunidat_upscaler.safetensors")
+        ,("/kaggle/input/flashface/pytorch/default/1/flashface.ckpt",
+        "/kaggle/working/ComfyUI/models/flashface/flashface.ckpt")
     ]
     for src, dest in links:
         xlinkthis(src,dest)
