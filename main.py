@@ -207,6 +207,15 @@ def link_additional_models():
     for x in os.listdir("/kaggle/input/instantir/pytorch/default/2/"):
         print(x)
         xlinkthis(f"/kaggle/input/instantir/pytorch/default/2/{x}", f"/kaggle/working/ComfyUI/models/InstantIR/models/{x}")
+    
+    source_dir = "/kaggle/input/nix-flux-fusion-models/pytorch/default/1/"
+    destination_dir = "/kaggle/working/ComfyUI/models/unet/"
+    # NIX-FLUX-FUSION-MODELS : Iterate through files in the source directory
+    for x in os.listdir(source_dir):
+        source_path = os.path.join(source_dir, x)
+        destination_path = os.path.join(destination_dir, x)
+        print(x)
+        xlinkthis(source_path,destination_path)
 
 
     
@@ -485,7 +494,7 @@ def install_packages_list():
         "https://github.com/evanspearman/ComfyMath",
         "https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes",
         "https://github.com/storyicon/comfyui_segment_anything",
-        
+        "https://github.com/PrunaAI/ComfyUI_pruna",
 
         "https://github.com/zhangp365/ComfyUI-utils-nodes",
         "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
