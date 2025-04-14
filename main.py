@@ -58,6 +58,9 @@ def install_package(url):
         if os.path.exists("requirements.txt"):
             subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'], check=True, text=True, capture_output=True)
 
+        if os.path.exists("install.py"):
+            subprocess.run([sys.executable,'install.py'], check=True, text=True, capture_output=True)
+
         print("="*60, f"Package from {url} installed successfully.", "-"*60, sep="\n")
     except Exception as e:
         print(f"An error occurred while installing package from {url}: {str(e)}")
