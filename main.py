@@ -527,7 +527,13 @@ def main():
         # Move files
         x_old = '/kaggle/working/old_output'
         move_files(folder_to_zip, x_old)
+        
+    # Link models
+    link_models()
 
+    # link_additional_models
+    link_additional_models()
+    
     # Setup ComfyUI
     setup_comfyui()
 
@@ -537,11 +543,6 @@ def main():
     # Setup ComfyUI
     setup_comfyui()
 
-    # Link models
-    link_models()
-
-    # link_additional_models
-    link_additional_models()
 
     # Start ComfyUI instances
     start_comfyui_instances()
