@@ -65,13 +65,56 @@ def install_package(url):
     except Exception as e:
         print(f"An error occurred while installing package from {url}: {str(e)}")
         # You can add additional error handling or logging here if needed
-
+def run_command(cmd, cwd=None):
+    """Run command with real-time output streaming"""
+    process = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        cwd=cwd
+    )
+    
+    # Stream output while process runs
+    for stream in [process.stdout, process.stderr]:
+        if stream:
+            for line in iter(stream.readline, ''):
+                sys.stdout.write(line)
+                sys.stdout.flush()
+    
+    return process.wait()
+    
 def setup_comfyui():
     """Set up ComfyUI and install necessary packages."""
     print("="*60, "Starting to set up ComfyUI...", "-"*60, sep="\n")
     os.chdir("/kaggle/working")
-    if not os.path.exists("/kaggle/working/ComfyUI/") or not os.path.exists("/kaggle/working/ComfyUI/requirements.txt") :
-        subprocess.run(['git', 'clone', 'https://github.com/comfyanonymous/ComfyUI.git', '--recursive'], check=True, text=True, capture_output=True)
+    # if not os.path.exists("/kaggle/working/ComfyUI/") or not os.path.exists("/kaggle/working/ComfyUI/requirements.txt") :
+    #     subprocess.run(['git', 'clone', 'https://github.com/comfyanonymous/ComfyUI.git', '--recursive'], check=True, text=True, capture_output=True)
+        
+    # Check if directory exists
+    REPO_DIR = "/kaggle/working/ComfyUI/"
+    REPO_URL = "https://github.com/comfyanonymous/ComfyUI.git"
+
+    # Export GIT_DISCOVERY_ACROSS_FILESYSTEM
+    os.environ["GIT_DISCOVERY_ACROSS_FILESYSTEM"] = "1"
+    
+    if os.path.isdir(REPO_DIR):
+        print(f"Directory '{REPO_DIR}' exists")
+        
+        if os.path.isdir(os.path.join(REPO_DIR, ".git")):
+            print("Pulling latest changes...")
+            retcode = run_command(["git",'-C',REPO_DIR, "pull", "--all"], cwd=REPO_DIR)
+            if retcode != 0:
+                print(f"Git pull failed with code {retcode}", file=sys.stderr)
+        else:
+            print("Not a Git repository - recloning...")
+            subprocess.run(["rm", "-rf", REPO_DIR], check=True)
+            print("Cloning repository...")
+            retcode = run_command(["git", "clone", '--recursive', REPO_URL, REPO_DIR])
+    else:
+        print("Cloning repository...")
+        retcode = run_command(["git", "clone", '--recursive', REPO_URL, REPO_DIR])
+        
     os.chdir("ComfyUI")
     subprocess.run(['git', 'pull', '--all'])
     subprocess.run(['uv','pip', 'install', '--system', '-r', 'requirements.txt', '--quiet'])
