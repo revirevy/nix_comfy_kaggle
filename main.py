@@ -522,6 +522,7 @@ def install_packages_list():
         "https://github.com/mav-rik/facerestore_cf",
         "https://github.com/smthemex/ComfyUI_InstantIR_Wrapper",
         "https://github.com/cubiq/ComfyUI_essentials",
+        "https://github.com/LykosAI/ComfyUI-Inference-Core-Nodes",
 
         
         "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet",
