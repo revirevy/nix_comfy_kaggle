@@ -182,8 +182,8 @@ def link_models():
          "/kaggle/working/ComfyUI/models/instantid/ip_adapter.bin"),
         ("/kaggle/input/instant_id/pytorch/default/2/instantid-ip-adapter.bin",
          "/kaggle/working/ComfyUI/models/instantid/SDXL/ip-adapter.bin"),
-        ("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/controlnet_instantid_model.safetensors",
-         "/kaggle/working/ComfyUI/models/controlnet/instantid/LeInstantID_ControlNet_model.safetensors"),
+        # ("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/controlnet_instantid_model.safetensors",
+        #  "/kaggle/working/ComfyUI/models/controlnet/instantid/LeInstantID_ControlNet_model.safetensors"),
         ("/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/4xnomosunidat_upscaler.safetensors",
          "/kaggle/working/ComfyUI/models/upscale_models/4xnomosunidat_upscaler.safetensors")
         ,("/kaggle/input/flashface/pytorch/default/1/flashface.ckpt",
@@ -263,8 +263,27 @@ def link_additional_models():
         print(x)
         xlinkthis(source_path,destination_path)
 
-
+    # FLUX-LORAS MODELS : Iterate through files in the source directory
+    source_dir = "/kaggle/input/flux_loras/pytorch/default/1/"
+    destination_dir = "/kaggle/working/ComfyUI/models/loras/"
     
+    for x in os.listdir(source_dir):
+        source_path = os.path.join(source_dir, x)
+        destination_path = os.path.join(destination_dir, x)
+        print(x)
+        xlinkthis(source_path,destination_path)   
+        
+
+    # FLUX-LORAS MODELS : Iterate through files in the source directory
+    source_dir = "/kaggle/input/loras_diff_comfy/pytorch/default/1/"
+    destination_dir = "/kaggle/working/ComfyUI/models/loras/"
+    
+    for x in os.listdir(source_dir):
+        source_path = os.path.join(source_dir, x)
+        destination_path = os.path.join(destination_dir, x)
+        print(x)
+        xlinkthis(source_path,destination_path)        
+
     
     # /kaggle/input/controlnet-package-hsbd10/pytorch/default/4
     print("="*60, "Additional models linked successfully.", "="*60, sep="\n")
