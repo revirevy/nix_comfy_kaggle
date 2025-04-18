@@ -534,7 +534,7 @@ def install_packages_list():
         "https://github.com/fssorc/ComfyUI_FaceShaper",
         
         "https://github.com/vuongminh1907/ComfyUI_ZenID",
-        "https://github.com/nuanarchy/ComfyUI-NuA-FlashFace",
+        # "https://github.com/nuanarchy/ComfyUI-NuA-FlashFace",
         "https://github.com/nosiu/comfyui-instantId-faceswap",
         "https://github.com/EnragedAntelope/ComfyUI-EACloudNodes",
         "https://github.com/nicofdga/DZ-FaceDetailer",
@@ -551,7 +551,7 @@ def install_packages_list():
         "https://github.com/ssitu/ComfyUI_UltimateSDUpscale",
         "https://github.com/kijai/ComfyUI-CCSR",
         "https://github.com/TheBill2001/comfyui-upscale-by-model",
-        "https://github.com/zentrocdot/ComfyUI-RealESRGAN_Upscaler",
+        # "https://github.com/zentrocdot/ComfyUI-RealESRGAN_Upscaler",
         "https://github.com/traugdor/ComfyUI-UltimateSDUpscale-GGUF",
         "https://github.com/jags111/efficiency-nodes-comfyui",
         "https://github.com/kijai/ComfyUI-segment-anything-2",
