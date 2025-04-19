@@ -132,9 +132,13 @@ def setup_comfyui():
 
 def xlinkthis(src, dest):
     import os
-    os.makedirs(os.path.dirname(dest), exist_ok=True)
-    if not os.path.exists(dest) and not os.path.islink(dest):
-        os.symlink(src, dest)
+    try:
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        if not os.path.exists(dest) and not os.path.islink(dest):
+            os.symlink(src, dest)
+    except Exception as e:
+        print(f"[xlinkthis] Failed to create symlink from '{src}' to '{dest}': {e}")
+
 
 def link_models():
     """Create symbolic links for model files."""
@@ -193,99 +197,38 @@ def link_models():
         xlinkthis(src,dest)
     print("="*60, "Models linked successfully.", "-"*60, sep="\n")
 
+MODEL_LINKS = [
+    ("/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/", "/kaggle/working/ComfyUI/models/upscale_models/"),
+    ("/kaggle/input/t5_xxl_gguf_models/pytorch/default/1/", "/kaggle/working/ComfyUI/models/clip/"),
+    ("/kaggle/input/sdxl_controlnets/pytorch/default/3/", "/kaggle/working/ComfyUI/models/controlnet/"),
+    ("/kaggle/input/pulid-model/pytorch/default/3/", "/kaggle/working/ComfyUI/models/pulid/"),
+    ("/kaggle/input/instant_id/pytorch/default/2", "/kaggle/working/ComfyUI/models/controlnet/"),
+    ("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/", "/kaggle/working/ComfyUI/models/controlnet/"),
+    ("/kaggle/input/dmd2/pytorch/default/1", "/kaggle/working/ComfyUI/models/checkpoints/"),
+    ("/kaggle/input/juggernaut/pytorch/default/1/", "/kaggle/working/ComfyUI/models/checkpoints/"),
+    ("/kaggle/input/realvisxl-v50/pytorch/default/3/", "/kaggle/working/ComfyUI/models/checkpoints/"),
+    ("/kaggle/input/instantir/pytorch/default/2/", "/kaggle/working/ComfyUI/models/InstantIR/models/"),
+    ("/kaggle/input/nix-flux-fusion-models/pytorch/default/1/", "/kaggle/working/ComfyUI/models/unet/"),
+    ("/kaggle/input/flux_loras/pytorch/default/1/", "/kaggle/working/ComfyUI/models/loras/"),
+    ("/kaggle/input/loras_diff_comfy/pytorch/default/1/", "/kaggle/working/ComfyUI/models/loras/"),
+]
+
 def link_additional_models():
-    """Link additional models from specified directories."""
+    """Link additional models from specified source to destination directories."""
+
     print("="*60, "Starting to link additional models...", "="*60, sep="\n")
-
-    # Link models from /kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/
-    for x in os.listdir("/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/{x}", f"/kaggle/working/ComfyUI/models/upscale_models/{x}")
-
-    # Link models from /kaggle/input/t5_xxl_gguf_models/pytorch/default/1/
-    for x in os.listdir("/kaggle/input/t5_xxl_gguf_models/pytorch/default/1/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/t5_xxl_gguf_models/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/clip/{x}")
-
-    # Link models from /kaggle/input/sdxl_controlnets/pytorch/default/3/
-    for x in os.listdir("/kaggle/input/sdxl_controlnets/pytorch/default/3/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/sdxl_controlnets/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
-        if 'ip-adapter' in x:
-            xlinkthis(f"/kaggle/input/sdxl_controlnets/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/ipadapter/{x}")
-
-    # Link models from /kaggle/input/pulid-model/pytorch/default/3/
-    for x in os.listdir("/kaggle/input/pulid-model/pytorch/default/3/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/pulid-model/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/pulid/{x}")
-
-    for x in os.listdir("/kaggle/input/instant_id/pytorch/default/2"):
-        print(x)
-        xlinkthis(f"/kaggle/input/instant_id/pytorch/default/2/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
-        #/kaggle/input/instant_id/pytorch/default/2
     
-    for x in os.listdir("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/{x}", f"/kaggle/working/ComfyUI/models/controlnet/{x}")
-    
-    
-    for x in os.listdir("/kaggle/input/dmd2/pytorch/default/1"):
-        print(x)
-        if 'lora' in x:
-            xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/loras/{x}")
-        elif 'unet' in x.lower():
-            xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/unet/{x}")
-        else:
-            xlinkthis(f"/kaggle/input/dmd2/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
-
-    # /kaggle/input/juggernaut/pytorch/default/1
-
-    for x in os.listdir("/kaggle/input/juggernaut/pytorch/default/1/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/juggernaut/pytorch/default/1/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
-
-    #SDXl-mODELS
-    for x in os.listdir("/kaggle/input/realvisxl-v50/pytorch/default/3/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/realvisxl-v50/pytorch/default/3/{x}", f"/kaggle/working/ComfyUI/models/checkpoints/{x}")
-
-    #InstantIR
-    for x in os.listdir("/kaggle/input/instantir/pytorch/default/2/"):
-        print(x)
-        xlinkthis(f"/kaggle/input/instantir/pytorch/default/2/{x}", f"/kaggle/working/ComfyUI/models/InstantIR/models/{x}")
-    
-    source_dir = "/kaggle/input/nix-flux-fusion-models/pytorch/default/1/"
-    destination_dir = "/kaggle/working/ComfyUI/models/unet/"
-    # NIX-FLUX-FUSION-MODELS : Iterate through files in the source directory
-    for x in os.listdir(source_dir):
-        source_path = os.path.join(source_dir, x)
-        destination_path = os.path.join(destination_dir, x)
-        print(x)
-        xlinkthis(source_path,destination_path)
-
-    # FLUX-LORAS MODELS : Iterate through files in the source directory
-    source_dir = "/kaggle/input/flux_loras/pytorch/default/1/"
-    destination_dir = "/kaggle/working/ComfyUI/models/loras/"
-    
-    for x in os.listdir(source_dir):
-        source_path = os.path.join(source_dir, x)
-        destination_path = os.path.join(destination_dir, x)
-        print(x)
-        xlinkthis(source_path,destination_path)   
-        
-
-    # FLUX-LORAS MODELS : Iterate through files in the source directory
-    source_dir = "/kaggle/input/loras_diff_comfy/pytorch/default/1/"
-    destination_dir = "/kaggle/working/ComfyUI/models/loras/"
-    
-    for x in os.listdir(source_dir):
-        source_path = os.path.join(source_dir, x)
-        destination_path = os.path.join(destination_dir, x)
-        print(x)
-        xlinkthis(source_path,destination_path)        
+    for src_dir, dst_dir in MODEL_LINKS:
+        if not os.path.isdir(src_dir):
+            print(f"[link_additional_models] Source directory does not exist: {src_dir}")
+            continue
+        for filename in os.listdir(src_dir):
+            print(filename)
+            src_path = os.path.join(src_dir, filename)
+            dst_path = os.path.join(dst_dir, filename)
+            xlinkthis(src_path, dst_path)
 
     
-    # /kaggle/input/controlnet-package-hsbd10/pytorch/default/4
     print("="*60, "Additional models linked successfully.", "="*60, sep="\n")
 
 def start_comfyui_instances():
