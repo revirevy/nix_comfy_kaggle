@@ -133,6 +133,7 @@ def setup_comfyui():
 def xlinkthis(src, dest):
     import os
     try:
+        print(f"[xlinkthis] Create symlink from '{src}' to '{dest}'")
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         if not os.path.exists(dest) and not os.path.islink(dest):
             os.symlink(src, dest)
