@@ -187,6 +187,15 @@ def link_models():
          "/kaggle/working/ComfyUI/models/instantid/ip_adapter.bin"),
         ("/kaggle/input/instant_id/pytorch/default/2/instantid-ip-adapter.bin",
          "/kaggle/working/ComfyUI/models/instantid/SDXL/ip-adapter.bin"),
+
+        ("/kaggle/input/instant_id/pytorch/default/2/instantid-ip-adapter.bin",
+         "/kaggle/working/ComfyUI/models/controlnet/instantid/InstantID_ip_adapter.bin"),
+        ("/kaggle/input/instant_id/pytorch/default/2/instantid-ip-adapter.bin",
+         "/kaggle/working/ComfyUI/models/controlnet/instantid/ip_adapter.bin"),
+        ("/kaggle/input/instant_id/pytorch/default/2/instantid-ip-adapter.bin",
+         "/kaggle/working/ComfyUI/models/controlnet/instantid/SDXL/ip-adapter.bin"),
+
+        
         # ("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/controlnet_instantid_model.safetensors",
         #  "/kaggle/working/ComfyUI/models/controlnet/instantid/LeInstantID_ControlNet_model.safetensors"),
         ("/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/4xnomosunidat_upscaler.safetensors",
