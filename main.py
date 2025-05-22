@@ -123,7 +123,7 @@ def setup_comfyui():
         "/kaggle/working/ComfyUI/models/LLM",
         "/kaggle/working/ComfyUI/models/pulid",
         "/kaggle/working/ComfyUI/models/clip_vision",
-        "/kaggle/working/ComfyUI/models/xlabs/contronets/"
+        "/kaggle/working/ComfyUI/models/xlabs/controlnets/"
         "/kaggle/working/ComfyUI/models/InstantIR/models/"
     ]
     for dir_path in model_dirs:
@@ -155,10 +155,10 @@ def link_models():
          "/kaggle/working/ComfyUI/models/LLM/Florence_model_3.safetensors"),
         ("/kaggle/input/florence2/transformers/default/1/Florence2_model_2/model.safetensors",
          "/kaggle/working/ComfyUI/models/LLM/Florence_model_2.safetensors"),
-        ("/kaggle/input/controlnet/pytorch/flux-canny-controlnet/1/flux-canny-controlnet-v3.safetensors",
-         "/kaggle/working/ComfyUI/models/xlabs/contronets/flux-canny-controlnet-v3.safetensors"),
-        ("/kaggle/input/controlnet/pytorch/flux-depth-controlnet/1/flux-depth-controlnet-v3.safetensors",
-         "/kaggle/working/ComfyUI/models/xlabs/contronets/flux-depth-controlnet-v3.safetensors"),
+        # ("/kaggle/input/controlnet/pytorch/flux-canny-controlnet/1/flux-canny-controlnet-v3.safetensors",
+        #  "/kaggle/working/ComfyUI/models/xlabs/controlnets/flux-canny-controlnet-v3.safetensors"),
+        # ("/kaggle/input/controlnet/pytorch/flux-depth-controlnet/1/flux-depth-controlnet-v3.safetensors",
+        #  "/kaggle/working/ComfyUI/models/xlabs/controlnets/flux-depth-controlnet-v3.safetensors"),
         # ("/kaggle/input/realvisxl-v50/pytorch/default/1/realvisxl-v50.safetensors",
         #  "/kaggle/working/ComfyUI/models/checkpoints/realvisxl-v50.safetensors"),
         # ("/kaggle/input/realvisxl-v50/pytorch/default/2/SG161222_RealVisXL_V5_0_Lightning.safetensors",
@@ -211,15 +211,17 @@ MODEL_LINKS = [
     ("/kaggle/input/4xnomosunidat_upscaler/pytorch/default/5/", "/kaggle/working/ComfyUI/models/upscale_models/"),
     ("/kaggle/input/t5_xxl_gguf_models/pytorch/default/1/", "/kaggle/working/ComfyUI/models/clip/"),
     ("/kaggle/input/sdxl_controlnets/pytorch/default/4/", "/kaggle/working/ComfyUI/models/controlnet/"),
-    ("/kaggle/input/pulid-model/pytorch/default/3/", "/kaggle/working/ComfyUI/models/pulid/"),
+    ("/kaggle/input/pulid-model/pytorch/default/4/", "/kaggle/working/ComfyUI/models/pulid/"),
     ("/kaggle/input/nix_instantid_ipadapter/pytorch/default/1", "/kaggle/working/ComfyUI/models/controlnet/"),
     ("/kaggle/input/nix_instantid_ipadapter/pytorch/default/1", "/kaggle/working/ComfyUI/models/instantid/"),
     ("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/", "/kaggle/working/ComfyUI/models/controlnet/"),
+    ("/kaggle/input/controlnet-package-hsbd10/pytorch/default/4/", "/kaggle/working/ComfyUI/models/xlabs/controlnets/"),
     ("/kaggle/input/dmd2/pytorch/default/1", "/kaggle/working/ComfyUI/models/checkpoints/"),
     ("/kaggle/input/juggernaut/pytorch/default/1/", "/kaggle/working/ComfyUI/models/checkpoints/"),
     ("/kaggle/input/realvisxl-v50/pytorch/default/3/", "/kaggle/working/ComfyUI/models/checkpoints/"),
     ("/kaggle/input/instantir/pytorch/default/2/", "/kaggle/working/ComfyUI/models/InstantIR/models/"),
     ("/kaggle/input/nix-flux-fusion-models/pytorch/default/1/", "/kaggle/working/ComfyUI/models/unet/"),
+    ("/kaggle/input/nix-flux-fusion-models/pytorch/default/1/", "/kaggle/working/ComfyUI/models/diffusion_models/"),
     ("/kaggle/input/flux_loras/pytorch/default/1/", "/kaggle/working/ComfyUI/models/loras/"),
     ("/kaggle/input/loras_diff_comfy/pytorch/default/1/", "/kaggle/working/ComfyUI/models/loras/"),
 ]
