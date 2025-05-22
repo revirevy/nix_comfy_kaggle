@@ -224,6 +224,7 @@ MODEL_LINKS = [
     ("/kaggle/input/nix-flux-fusion-models/pytorch/default/1/", "/kaggle/working/ComfyUI/models/diffusion_models/"),
     ("/kaggle/input/flux_loras/pytorch/default/1/", "/kaggle/working/ComfyUI/models/loras/"),
     ("/kaggle/input/loras_diff_comfy/pytorch/default/1/", "/kaggle/working/ComfyUI/models/loras/"),
+     ("/kaggle/input/ccsr-safetensors/", "/kaggle/working/ComfyUI/models/checkpoints/"),
 ]
 
 def link_additional_models():
